@@ -1,0 +1,28 @@
+[
+  {
+    "title": "Slope",
+    "slug": "slope",
+    "category": "Arcade",
+    "url": "https://example-cdn.com/games/slope/index.html",
+    "thumb": "assets/thumbs/slope.jpg",
+    "tags": ["fast", "3D", "reflex"],
+    "featured": true
+  },
+  {
+    "title": "Tunnel Rush",
+    "slug": "tunnel-rush",
+    "category": "Arcade",
+    "url": "https://example-cdn.com/games/tunnel-rush/index.html",
+    "thumb": "assets/thumbs/tunnel-rush.jpg",
+    "tags": ["runner", "color", "tunnel"]
+  },
+  {
+    "title": "Chess",
+    "slug": "chess",
+    "category": "Strategy",
+    "url": "https://example-cdn.com/games/chess/index.html",
+    "thumb": "assets/thumbs/chess.jpg",
+    "tags": ["board", "multiplayer"],
+    "featured": true
+  }
+]
