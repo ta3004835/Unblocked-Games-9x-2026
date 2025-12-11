@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Play — Unblocked Games 9x</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <img src="assets/logo.svg" alt="" class="logo" />
+      <h1>Unblocked Games 9x</h1>
+    </div>
+    <div class="actions">
+      <a class="cta" href="/">Back</a>
+    </div>
+  </header>
+
+  <main style="padding: 12px 20px;">
+    <div id="gameHeader" class="game-header">
+      <h2 id="gameTitle">Loading…</h2>
+      <div class="card-actions">
+        <button id="favBtn" class="btn">☆ Favorite</button>
+        <a id="openNew" class="btn" target="_blank" rel="noopener">Open in new tab</a>
+      </div>
+    </div>
+
+    <div class="player-wrap">
+      <div id="loader" class="loader">Loading game…</div>
+      <iframe id="player" title="Game player" class="player"
+        sandbox="allow-scripts allow-same-origin allow-pointer-lock"
+        referrerpolicy="no-referrer"
+        allowfullscreen
+        hidden>
+      </iframe>
+    </div>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const slug = params.get('slug');
+    const titleEl = document.getElementById('gameTitle');
+    const iframe = document.getElementById('player');
+    const loader = document.getElementById('loader');
+    const favBtn = document.getElementById('favBtn');
+    const openNew = document.getElementById('openNew');
+
+    const favorites = new Set(JSON.parse(localStorage.getItem('favorites') || '[]'));
+    function setFavUI() {
+      const fav = favorites.has(slug);
+      favBtn.textContent = fav ? '★ Favorited' : '☆ Favorite';
+      favBtn.setAttribute('aria-pressed', fav);
+    }
+    favBtn.addEventListener('click', () => {
+      if (favorites.has(slug)) favorites.delete(slug);
+      else favorites.add(slug);
+      localStorage.setItem('favorites', JSON.stringify(Array.from(favorites)));
+      setFavUI();
+    });
+
+    async function init() {
+      const res = await fetch('games.json', { cache: 'no-store' });
+      const games = await res.json();
+      const game = games.find(g => g.slug === slug);
+      if (!game) {
+        titleEl.textContent = 'Game not found';
+        loader.textContent = 'Oops—this game was removed or renamed.';
+        return;
+      }
+      titleEl.textContent = game.title;
+      setFavUI();
+
+      // Show game
+      iframe.src = game.url;
+      openNew.href = game.url;
+
+      iframe.addEventListener('load', () => {
+        loader.hidden = true;
+        iframe.hidden = false;
+      });
+
+      // Timeout fallback
+      setTimeout(() => {
+        if (iframe.hidden) loader.textContent = 'This game may be blocked. Try "Open in new tab".';
+      }, 6000);
+    }
+    init();
+  </script>
+
+  <style>
+    .game-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .player-wrap { border: 1px solid var(--border); border-radius: 16px; background: var(--card); overflow: hidden; min-height: 60vh; }
+    .player { width: 100%; height: 70vh; border: 0; display: block; }
+    .loader { padding: 18px; color: var(--text-dim); }
+    @media (max-width: 700px) { .player { height: 68vh; } }
+  </style>
+</body>
+</html>
