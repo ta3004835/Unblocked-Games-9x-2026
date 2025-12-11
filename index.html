@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Unblocked Games 9x</title>
+  <meta name="description" content="Play fast, modern unblocked games without downloads.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="assets/icon-192.png">
+  <link rel="preload" href="styles.css" as="style">
+  <link rel="stylesheet" href="styles.css">
+  <meta name="theme-color" content="#0f172a">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <img src="assets/logo.svg" alt="" class="logo" />
+      <h1>Unblocked Games 9x</h1>
+    </div>
+
+    <div class="actions">
+      <button id="themeToggle" aria-label="Toggle theme"></button>
+      <a class="cta" href="#" id="installBtn" hidden>Install App</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h2>Play instantly. No logins. No limits.</h2>
+        <p>Search, favorite, and jump right in. Everything loads fast and works offline.</p>
+        <div class="search-bar">
+          <input id="searchInput" type="text" placeholder="Search games…" autocomplete="off" />
+          <button id="clearSearch" aria-label="Clear">×</button>
+        </div>
+        <div class="filters">
+          <div class="chip-group" id="categoryChips"></div>
+          <label class="checkbox">
+            <input type="checkbox" id="favOnly"> Favorites only
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <section class="featured" aria-label="Featured games">
+      <h3>Featured</h3>
+      <div class="carousel" id="featuredCarousel"></div>
+    </section>
+
+    <section class="grid-wrap" aria-label="All games">
+      <div class="grid" id="gamesGrid" aria-live="polite"></div>
+      <div id="emptyState" class="empty" hidden>
+        <h4>No matches</h4>
+        <p>Try a different search or category.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <nav class="footer-nav">
+      <a href="/">Home</a>
+      <a href="#" id="aboutBtn">About</a>
+      <a href="#" id="reportBtn">Report a bug</a>
+    </nav>
+    <p>© <span id="year"></span> Unblocked Games 9x</p>
+  </footer>
+
+  <dialog id="aboutDialog">
+    <h3>About Unblocked Games 9x</h3>
+    <p>Fast, modern, and safe. Built for school-friendly fun.</p>
+    <form method="dialog"><button class="btn">Close</button></form>
+  </dialog>
+
+  <dialog id="reportDialog">
+    <h3>Report a bug</h3>
+    <p>Describe the issue. We’ll improve it fast.</p>
+    <textarea id="reportText" rows="4" placeholder="What's wrong?"></textarea>
+    <div class="dialog-actions">
+      <button class="btn btn-secondary" value="cancel">Cancel</button>
+      <button class="btn" id="sendReport">Send</button>
+    </div>
+  </dialog>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
